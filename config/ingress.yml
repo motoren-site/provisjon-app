@@ -12,7 +12,7 @@ spec:
     http:
       paths:
       - pathType: Prefix
-        path: "/"
+        path: "/lonn"
         backend:
           service:
             name: lonn
