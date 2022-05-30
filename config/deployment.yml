@@ -1,0 +1,30 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: motoren-frontpage
+  namespace: apps
+  labels:
+    k8s-app: motoren-frontpage
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      k8s-app: motoren-frontpage
+  template:
+    metadata:
+      name: motoren-frontpage
+      labels:
+        k8s-app: motoren-frontpage
+    spec:
+      containers:
+        - name: motoren-frontpage
+          image: <IMAGE>
+          imagePullPolicy: Always
+          securityContext:
+            privileged: false
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+  strategy:
+    type: RollingUpdate
+  minReadySeconds: 5
