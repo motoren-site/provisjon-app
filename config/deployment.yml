@@ -1,23 +1,23 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: motoren-frontpage
+  name: lonn-app
   namespace: apps
   labels:
-    k8s-app: motoren-frontpage
+    k8s-app: lonn-app
 spec:
   replicas: 2
   selector:
     matchLabels:
-      k8s-app: motoren-frontpage
+      k8s-app: lonn-app
   template:
     metadata:
-      name: motoren-frontpage
+      name: lonn-app
       labels:
-        k8s-app: motoren-frontpage
+        k8s-app: lonn-app
     spec:
       containers:
-        - name: motoren-frontpage
+        - name: lonn-app
           image: <IMAGE>
           imagePullPolicy: Always
           securityContext:
