@@ -16,6 +16,7 @@ jobs:
         registry: registry.digitalocean.com
         username: ${{ secrets.DIGITAL_OCEAN_TOKEN }}
         password: ${{ secrets.DIGITAL_OCEAN_TOKEN }}
+        
 
     - name: Build latest
       run: docker build -t registry.digitalocean.com/olsen/lonn-app:$(echo $GITHUB_SHA | head -c7) .
