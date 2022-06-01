@@ -5,7 +5,7 @@ metadata:
   namespace: apps
   annotations:
     kubernetes.io/ingress.class: nginx
-  #  nginx.ingress.kubernetes.io/rewrite-target: /$2
+    #nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
   - host: "lonn.motoren.site"
@@ -15,6 +15,6 @@ spec:
         path: "/"
         backend:
           service:
-            name: lonn
+            name: lonn-app
             port:
               number: 80
