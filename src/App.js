@@ -1,65 +1,99 @@
-import {React, useState} from 'react';
+import { React, useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import './App.css';
 import axios from "axios";
 
 export default function App() {
 
+  function Sum(prop) {
+
+    const [sum, setSum] = useState(0);
+
+    useEffect(()=> {
+      setSum(prop.lonn);
+    });
+
+    if(prop.lonn > 0) {
+        return ( <h1 className='title is-1'>{Math.round(sum)} kr</h1>);
+    }
+
+  }
 
   function Appen() {
     const [lonnData, setLonnData] = useState({});
 
     const notValid = (req) => {
-      console.log(req);
       return req.breakAugust === '' ||
-      req.breakJuly == '' ||
-      req.breakSeptember === '' ||
-      req.fixedSalary === '' ||
-      req.hourPrice === '' ||
-      req.percentage === '';
+        req.breakJuly == '' ||
+        req.breakSeptember === '' ||
+        req.fixedSalary === '' ||
+        req.hourPrice === '' ||
+        req.percentage === '';
     }
 
-    const getFerielonn = async (lonnReq) => {
+    const getFerielonn = (lonnReq) => {
       if (notValid(lonnReq)) {
         return;
       }
 
-      const resp = await axios.post('/lonn-api/ferielonn',lonnReq)
-      .then(res => {
-         setLonnData(res.data);
-      })
-     
+      axios.post('/lonn-api/ferielonn', lonnReq)
+        .then(res => {
+          setLonnData(res.data);
+        })
+
     };
-  
+
+    useEffect(() => {
+      if (lonnData.sumLonn == undefined) {
+        return;
+      }
+      document.title = `${lonnData.sumLonn}`;
+    });
+
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = formData => {
       getFerielonn(formData);
     };
 
-    return (    <div className="App">
-    <header className="App-header">
-      <div id="grid">
-        
-        <h1>{lonnData.sumLonn}</h1>
-    <form onSubmit={handleSubmit(onSubmit)} onChange={handleSubmit(onSubmit)}>
-      <input type="number" placeholder="Timepris" {...register("hourPrice", {})} />
-      <input type="number" placeholder="Fastlønn" {...register("fixedSalary", {})} />
-      <input type="number" placeholder="Antall dager fri Juli" {...register("breakJuly", {})} />
-      <input type="number" placeholder="Antall dager fri August" {...register("breakAugust", {})} />
-      <input type="number" placeholder="Antall dager fri September" {...register("breakSeptember", {})} />
-      <input type="text" placeholder="Provisjons prosent" {...register("percentage", {})} />
+    return (<div>
+        <Sum lonn={lonnData.sumLonn}></Sum>
+       <div className='field'>
+       <form onSubmit={handleSubmit(onSubmit)} onChange={handleSubmit(onSubmit)}>
 
-      <input title='Kalkuler' type="submit" />
-    </form>
-    </div>
-    </header>
+         <label className='label'>Timepris</label>
+          <input className='input' type="number"  {...register("hourPrice", {})} />
+          <label className='label'>Fastlønn</label>
+          <input className='input' type="number" {...register("fixedSalary", {})} />
+          <label className='label'>Antall dager fri Juli</label>
+
+          <input className='input' type="number" {...register("breakJuly", {})} />
+          <label className='label'>Antall dager fri August</label>
+
+          <input className='input' type="number"  {...register("breakAugust", {})} />
+          <label className='label'>Antall dager fri September</label>
+
+          <input className='input' type="number"  {...register("breakSeptember", {})} />
+          <label className='label'>Provisjons prosent</label>
+
+          <input className='input' type="text"  {...register("percentage", {})} />
+
+      </form>
+       </div>
     </div>);
 
   }
 
-  
 
   return (
-      <Appen></Appen>
+    <section className="section">
+      <div className="container">
+
+        <div className="columns">
+          <div className="column is-4 is-offset-4">
+            <Appen></Appen>
+          </div>
+
+        </div>
+      </div>
+    </section>
   );
 }
