@@ -55,7 +55,6 @@ export default function App() {
     };
 
     return (<div>
-        <Sum lonn={lonnData.sumLonn}></Sum>
        <div className='field'>
        <form onSubmit={handleSubmit(onSubmit)} onChange={handleSubmit(onSubmit)}>
 
@@ -78,6 +77,8 @@ export default function App() {
 
       </form>
        </div>
+       <Sum lonn={lonnData.sumLonn}></Sum>
+
     </div>);
 
   }
