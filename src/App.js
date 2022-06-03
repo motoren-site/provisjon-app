@@ -16,7 +16,6 @@ export default function App() {
       }
      
     });
-    console.log(sum);
     if(sum > -1) {
         return ( <h1 className='title is-1'>{Math.round(sum)} kr</h1>);
     }
@@ -51,7 +50,7 @@ export default function App() {
       if (lonnData.sumLonn == undefined) {
         return;
       }
-      document.title = `${lonnData.sumLonn}`;
+      document.title = `${Math.round(lonnData.sumLonn)}`;
     });
 
     const { register, handleSubmit, formState: { errors } } = useForm();
