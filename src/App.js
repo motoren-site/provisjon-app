@@ -9,10 +9,15 @@ export default function App() {
     const [sum, setSum] = useState(0);
 
     useEffect(()=> {
-      setSum(prop.lonn);
+      if(prop.lonn !== undefined) {
+        setSum(prop.lonn);
+      } else {
+        setSum(0);
+      }
+     
     });
-
-    if(prop.lonn > 0) {
+    console.log(sum);
+    if(sum > -1) {
         return ( <h1 className='title is-1'>{Math.round(sum)} kr</h1>);
     }
 
