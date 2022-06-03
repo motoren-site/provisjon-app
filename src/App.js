@@ -17,7 +17,7 @@ export default function App() {
      
     });
     if(sum > -1) {
-        return ( <h1 className='title is-1'>{Math.round(sum)} kr</h1>);
+        return ( <h1 className='title is-1'>{Math.round(sum).toLocaleString()} kr</h1>);
     }
 
   }
