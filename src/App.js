@@ -77,7 +77,7 @@ export default function App() {
           <input className='input' type="number"  {...register("breakSeptember", {})} />
           <label className='label'>Provisjons prosent</label>
 
-          <input className='input' type="text"  {...register("percentage", {})} />
+          <input className='input' type="number"  {...register("percentage", {})} />
 
       </form>
        </div>
