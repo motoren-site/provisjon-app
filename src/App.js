@@ -23,12 +23,10 @@ export default function App() {
   }
 
   function Appen() {
-    const [lonnData, setLonnData] = useState({});
+    const [lonnData, setLonnData] = useState(0);
 
     const notValid = (req) => {
-      return req.breakAugust === '' ||
-        req.breakJuly == '' ||
-        req.breakSeptember === '' ||
+      return req.hours === '' ||
         req.fixedSalary === '' ||
         req.hourPrice === '' ||
         req.percentage === '';
@@ -39,7 +37,7 @@ export default function App() {
         return;
       }
 
-      axios.post('/lonn-api/ferielonn', lonnReq)
+      axios.post('/lonn-api/lonn', lonnReq)
         .then(res => {
           setLonnData(res.data);
         })
@@ -47,10 +45,11 @@ export default function App() {
     };
 
     useEffect(() => {
-      if (lonnData.sumLonn == undefined) {
+      console.log("heiheihie")
+      if (lonnData === undefined) {
         return;
       }
-      document.title = `${Math.round(lonnData.sumLonn)}`;
+      document.title = `${Math.round(lonnData)}`;
     });
 
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -66,22 +65,17 @@ export default function App() {
           <input className='input' type="number"  {...register("hourPrice", {})} />
           <label className='label'>Fastlønn</label>
           <input className='input' type="number" {...register("fixedSalary", {})} />
-          <label className='label'>Antall dager fri Juli</label>
+          <label className='label'>Antall timer</label>
 
-          <input className='input' type="number" {...register("breakJuly", {})} />
-          <label className='label'>Antall dager fri August</label>
-
-          <input className='input' type="number"  {...register("breakAugust", {})} />
-          <label className='label'>Antall dager fri September</label>
-
-          <input className='input' type="number"  {...register("breakSeptember", {})} />
+          <input className='input' type="number" {...register("hours", {})} />
+        
           <label className='label'>Provisjons prosent</label>
 
           <input className='input' type="number"  {...register("percentage", {})} />
 
       </form>
        </div>
-       <Sum lonn={lonnData.sumLonn}></Sum>
+       <Sum lonn={lonnData}></Sum>
 
     </div>);
 
