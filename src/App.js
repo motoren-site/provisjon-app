@@ -32,7 +32,7 @@ export default function App() {
         req.percentage === '';
     }
 
-    const getFerielonn = (lonnReq) => {
+    const getLonn = (lonnReq) => {
       if (notValid(lonnReq)) {
         return;
       }
@@ -45,7 +45,6 @@ export default function App() {
     };
 
     useEffect(() => {
-      console.log("heiheihie")
       if (lonnData === undefined) {
         return;
       }
@@ -54,7 +53,7 @@ export default function App() {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = formData => {
-      getFerielonn(formData);
+      getLonn(formData);
     };
 
     return (<div>
